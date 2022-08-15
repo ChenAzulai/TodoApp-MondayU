@@ -7,13 +7,14 @@ const corsHeader = require("./server/middleware/cors_header_middleware");
 const path = require("path");
 
 const compression = require("compression");
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use([express.json(), logger, compression()]);
 // app.use(corsHeader);
 
-app.use(express.static(path.resolve(__dirname, "./client/build")));
+// app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname + "/server/public/build")))
 
 app.use("/todo", todoRouter);
 
